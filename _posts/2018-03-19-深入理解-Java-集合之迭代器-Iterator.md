@@ -4,8 +4,8 @@ title:      深入理解Java集合之迭代器Iterator
 subtitle:   Iterator底层原理剖析，以及在日常开发过程中使用它易遇到的坑。
 date:       2018-03-19             
 author:     jessehzx                
-header-img: 
-catalog: true
+header-img: img/post-bg-2015.jpg
+catalog: 	  true
 tags:
     - Jave
         
