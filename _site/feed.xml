@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jessehzx Blog</title>
+    <description>Determined to become the architect of the back-end developer.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 18 Mar 2018 23:11:18 +0800</pubDate>
+    <lastBuildDate>Sun, 18 Mar 2018 23:11:18 +0800</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>Spring中使用@Autowired注解静态变量</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;问题&quot;&gt;问题&lt;/h3&gt;
+
+&lt;p&gt;最近项目小组在重新规划工程的业务缓存，其中涉及到部分代码重构，过程中发现有些工具类中的静态方法需要依赖别的对象实例（该实例已配置在xml成bean，非静态可以用@Autowired加载正常使用），而我们知道，类加载后静态成员是在内存的共享区，静态方法里面的变量必然要使用静态成员变量，这就有了如下代码：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Component
+public class TestClass {
+
+    @Autowired
+    private static AutowiredTypeComponent component;
+
+    // 调用静态组件的方法
+    public static void testMethod() {
+        component.callTestMethod()；
+    }
+    
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;编译正常，但运行时报java.lang.NullPointerException: null异常，显然在调用testMethod()方法时，component变量还没被初始化，报NPE。&lt;/p&gt;
+
+&lt;h3 id=&quot;原因&quot;&gt;原因&lt;/h3&gt;
+
+&lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Springframework&lt;/code&gt;里，我们不能@Autowired一个静态变量，使之成为一个Spring bean。为什么？其实很简单，因为当类加载器加载静态变量时，Spring上下文尚未加载。所以类加载器不会在bean中正确注入静态类，并且会失败。&lt;/p&gt;
+
+&lt;h3 id=&quot;解决方案&quot;&gt;解决方案&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;方式一&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;将@Autowired 注解到类的构造函数上。很好理解，Spring扫描到AutowiredTypeComponent的bean，然后赋给静态变量component。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Component
+public class TestClass {
+
+    private static AutowiredTypeComponent component;
+
+    @Autowired
+    public TestClass(AutowiredTypeComponent component) {
+        TestClass.component = component;
+    }
+
+    // 调用静态组件的方法
+    public static void testMethod() {
+        component.callTestMethod()；
+    }
+    
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;方式二&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;给静态组件加setter方法，并在这个方法上加上@Autowired。Spring能扫描到AutowiredTypeComponent的bean，然后通过setter方法注入。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Component
+public class TestClass {
+
+    private static AutowiredTypeComponent component;
+
+    @Autowired
+    public void setComponent(AutowiredTypeComponent component){
+        TestClass.component = component;
+    }
+    
+    // 调用静态组件的方法
+    public static void testMethod() {
+        component.callTestMethod()；
+    }
+    
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;方式三&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;定义一个静态组件，定义一个非静态组件并加上@Autowired注解，再定义一个初始化组件的方法并加上@PostConstruct注解。这个注解是JavaEE引入的，作用于servlet生命周期的注解，你只需要知道，用它注解的方法在构造函数之后就会被调用。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Component
+public class TestClass {
+
+   private static AutowiredTypeComponent component;
+
+   @Autowired
+   private AutowiredTypeComponent autowiredComponent;
+
+   @PostConstruct
+   private void beforeInit() {
+      component = this.autowiredComponent;
+   }
+   
+   // 调用静态组件的方法
+   public static void testMethod() {
+      component.callTestMethod();
+   }
+   
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;方式四&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;直接用Spring框架工具类获取bean，定义成局部变量使用。但有弊端：如果该类中有多个静态方法多次用到这个组件则每次都要这样获取，个人不推荐这种方式。示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class TestClass {
+    
+    // 调用静态组件的方法
+   public static void testMethod() {
+      AutowiredTypeComponent component = SpringApplicationContextUtil.getBean(&quot;component&quot;);
+      component.callTestMethod();
+   }
+    
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在上面的代码示例中，我每个类都加了@Component注解，其实可以根据需要进行变更，比如这个类是处理业务逻辑，可以换成@Service；这个类是处理请求进行转发或重定向的，可以换成@Controller（是Spring-mvc的注解）；这个类是专门用来操作Dao的就@Repository。Spring的注解帮你做了一件很有意义的事：就是它们对应用进行了分层，这样就能将请求处理、业务逻辑处理、数据库操作处理分离出来，为代码解耦，也方便了项目的开发和维护。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Spring容器bean加载机制用到了Java的反射，这里先不作赘述，以后会专门写一篇文章来总结Java反射在Spring的IoC和AoP中的应用。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 18 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/18/Spring-%E4%B8%AD%E4%BD%BF%E7%94%A8-@Autowired-%E6%B3%A8%E8%A7%A3%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/18/Spring-%E4%B8%AD%E4%BD%BF%E7%94%A8-@Autowired-%E6%B3%A8%E8%A7%A3%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/</guid>
+        
+        <category>Spring</category>
+        
+        <category>后台开发</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
