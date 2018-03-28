@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Collections.sublist() not serializable 
+title:      解决集合sublist()报NotSerializableException 
 subtitle:   解决集合sublist()报未序列化的Exception
 date:       2018-03-28             
 author:     jessehzx                
