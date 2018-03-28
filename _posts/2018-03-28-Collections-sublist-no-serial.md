@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      解决集合subList()报NotSerializableException问题
-subtitle:   解决集合subList()报未序列化的Exception
+subtitle:   集合subList()之后报未序列化的Exception的原因及解决办法
 date:       2018-03-28             
 author:     jessehzx                
 header-img: img/post-bg-os-metro.jpg
 catalog: 	  true
 tags:
-    - Jave
+    - Java
         
 ---
 
