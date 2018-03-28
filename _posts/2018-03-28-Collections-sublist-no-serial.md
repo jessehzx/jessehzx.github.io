@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      解决集合sublist()报NotSerializableException 
-subtitle:   解决集合sublist()报未序列化的Exception
+title:      解决集合subList()报NotSerializableException问题
+subtitle:   解决集合subList()报未序列化的Exception
 date:       2018-03-28             
 author:     jessehzx                
-header-img: img/post-bg-2015.jpg
+header-img: img/post-bg-coffee.jpg
 catalog: 	  true
 tags:
     - Jave
