@@ -27,7 +27,10 @@ Caused by: java.io.NotSerializableException: java.util.RandomAccessSubList	at j
 存在即合理，凡事肯定有它的缘由。既然是`set`进`memcached`报了`NotSerializableException`，顾名思义就是没有序列化嘛，那就看看`subList()`返回了啥呗，我`option`+`command`+点进去，这玩意还是个内部类：
 
 ```
-private class SubList extends AbstractList<E> implements RandomAccess {}
+private class SubList extends AbstractList<E> implements RandomAccess
+{
+...
+}
 ```
 而ArrayList类是实现了`Serializable`接口的，所以和`memcached`打交道的时候它行云流水：
 
@@ -35,6 +38,8 @@ private class SubList extends AbstractList<E> implements RandomAccess {}
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
+...
+}
 ```
 
 那很显然了，问题就出在用`Collections.subList()`方法返回了不可序列化的`java.util.RandomAccessSubList`实例。
