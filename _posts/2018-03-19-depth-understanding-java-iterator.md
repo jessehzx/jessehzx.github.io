@@ -54,8 +54,8 @@ public class ArrayListDemo {
 1. 先定义一个新的ArrayList变量newAl，用于存储去重后的集合元素；
 2. 使用Iterator遍历原list中的元素，如果该元素不包含于newAl，就add；
 3. 返回newAl就是去重后的结果。
-### 原理
 
+### 原理
 
 > Iterator it = al.iterator();  // 定义迭代器，用于取出集合元素
 
