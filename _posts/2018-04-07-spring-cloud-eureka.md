@@ -145,11 +145,9 @@ Spring Cloud为开发者提供了实现分布式系统特性的工具。例如�
 ```
 
 ### 创建注册中心启动类
-我们采用Spring Boot风格创建一个启动类
+我们采用Spring Boot风格创建一个启动类top.jessehzx.eureka.EurekaApplication，代码如下：
 
 ```
-top.jessehzx.eureka.EurekaApplication
-
 package top.jessehzx.eureka;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -195,7 +193,8 @@ spring:
 
 配置文件的说明如下：
 
-1. 服务名称
+- 服务名称
+
 我们指定如下的参数，即为Eureka的管理台中的service name，服务名。
 
 ```
@@ -204,7 +203,7 @@ spring:
     name: Eureka Server
 ```
 
-2. Eureka 配置
+- Eureka 配置
 
 ```
 eureka:
