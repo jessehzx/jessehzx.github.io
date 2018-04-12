@@ -7,7 +7,8 @@ author:     jessehzx
 header-img: img/post-bg-os-metro.jpg
 catalog: 	  true
 tags:
-    - Spring Cloud
+    - Ribbon
+    - Feign
         
 ---
 
