@@ -234,7 +234,7 @@ public class RibbonConsumerController {
 	</properties>
 
 	<dependencies>
-		<!-- 引入feign -->
+		<!-- 引入feign依赖 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
