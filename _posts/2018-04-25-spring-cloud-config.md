@@ -14,7 +14,20 @@ tags:
 > 版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！
 
 ### 简介
-在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所以需要分布式配置中心组件。在Spring Cloud中，有分布式配置中心组件spring cloud config，它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git仓库中。在spring cloud config 组件中，分两个角色，一是config server，二是config client。
+在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所以需要分布式配置中心组件。
+
+在我们了解spring cloud config之前，我可以想想一个配置中心提供的核心功能应该有什么？
+
+- 提供服务端和客户端支持
+- 集中管理各环境的配置文件
+- 配置文件修改之后，可以快速的生效
+- 可以进行版本管理
+- 支持大的并发查询
+- 支持各种语言
+
+Spring Cloud Config可以完美的支持以上所有的需求。
+
+在Spring Cloud中，有分布式配置中心组件spring cloud config，它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git或svn仓库中。在spring cloud config 组件中，分两个角色，一是config server，二是config client。server提供配置文件的存储、以接口的形式将配置文件的内容提供出去，client通过接口获取数据、并依据此数据初始化自己的应用。
 
 ### 构建Config Server
 创建一个spring-boot项目，取名为config-server，其pom.xml:
