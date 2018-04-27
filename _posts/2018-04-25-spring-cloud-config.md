@@ -29,7 +29,7 @@ Spring Cloud Config可以完美的支持以上所有的需求。
 
 它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git或svn仓库中。在spring cloud config 组件中，分两个角色，一是config server，二是config client。server提供配置文件的存储、以接口的形式将配置文件的内容提供出去，client通过接口获取数据、并依据此数据初始化自己的应用。
 
-### 构建Config Server
+### 构建config server
 创建一个spring-boot项目，取名为config-server，其pom.xml:
 
 ```
@@ -99,19 +99,7 @@ Spring Cloud Config可以完美的支持以上所有的需求。
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-
-</project>
+    </project>
 ```
 
 在程序的入口Application类加上@EnableConfigServer注解开启配置服务器的功能，代码如下：
@@ -133,8 +121,7 @@ public class ConfigServerApplication {
 spring.application.name=config-server
 server.port=8888
 
-
-spring.cloud.config.server.git.uri=https://github.com/forezp/SpringcloudConfig/
+spring.cloud.config.server.git.uri=https://github.com/jessehzx/SpringcloudConfig/
 spring.cloud.config.server.git.searchPaths=respo
 spring.cloud.config.label=master
 spring.cloud.config.server.git.username=your username
@@ -142,15 +129,16 @@ spring.cloud.config.server.git.password=your password
 
 ```
 
-spring.cloud.config.server.git.uri：配置git仓库地址
-spring.cloud.config.server.git.searchPaths：配置仓库路径
-spring.cloud.config.label：配置仓库的分支
-spring.cloud.config.server.git.username：访问git仓库的用户名
-spring.cloud.config.server.git.password：访问git仓库的用户密码
+- spring.cloud.config.server.git.uri：配置git仓库地址
+- spring.cloud.config.server.git.searchPaths：配置仓库路径
+- spring.cloud.config.label：配置仓库的分支
+- spring.cloud.config.server.git.username：访问git仓库的用户名
+- spring.cloud.config.server.git.password：访问git仓库的用户密码
 
 如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写，本例子是公开仓库，放心使用。
 
-远程仓库https://github.com/forezp/SpringcloudConfig/ 中有个文件config-client-dev.properties文件中有一个属性：
+远程仓库https://github.com/jessehzx/SpringcloudConfig/ 中有个文件config-client-dev.properties文件中有一个属性：
+
 ```
 foo = foo version 3
 ```
@@ -165,12 +153,14 @@ foo = foo version 3
 证明配置服务中心可以从远程程序获取配置信息。
 
 http请求地址和资源文件映射如下:
+
 ```
 /{application}/{profile}[/{label}]
 /{application}-{profile}.yml
 /{label}/{application}-{profile}.yml
 /{application}-{profile}.properties
 /{label}/{application}-{profile}.properties
+
 ```
 
 ### 构建一个config client
