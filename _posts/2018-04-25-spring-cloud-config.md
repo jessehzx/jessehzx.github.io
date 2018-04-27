@@ -27,7 +27,7 @@ tags:
 
 Spring Cloud Config可以完美的支持以上所有的需求。
 
-在Spring Cloud中，有分布式配置中心组件spring cloud config，它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git或svn仓库中。在spring cloud config 组件中，分两个角色，一是config server，二是config client。server提供配置文件的存储、以接口的形式将配置文件的内容提供出去，client通过接口获取数据、并依据此数据初始化自己的应用。
+它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git或svn仓库中。在spring cloud config 组件中，分两个角色，一是config server，二是config client。server提供配置文件的存储、以接口的形式将配置文件的内容提供出去，client通过接口获取数据、并依据此数据初始化自己的应用。
 
 ### 构建Config Server
 创建一个spring-boot项目，取名为config-server，其pom.xml:
