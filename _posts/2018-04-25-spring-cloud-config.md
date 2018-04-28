@@ -294,7 +294,7 @@ public class ConfigClientApplication {
 foo version 3
 ```
 
-这就说明，config-client从config-server获取了foo的属性，而config-server是从git仓库读取的,如图：
+这就说明，config-client从config-server获取了foo的属性，而config-server是从git仓库读取的，如下图所示：
 
 ![]()
 
