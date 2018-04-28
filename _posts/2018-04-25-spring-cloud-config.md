@@ -165,7 +165,7 @@ http请求地址和资源文件映射如下:
 
 ### 构建一个config client
 
-重新创建一个spring boot项目，取名为config-client，其pom.xml文件：
+重新创建一个spring boot项目，取名为config-client，其pom.xml文件如下：
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
