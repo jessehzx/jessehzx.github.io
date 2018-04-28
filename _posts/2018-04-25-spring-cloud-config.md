@@ -259,12 +259,14 @@ server.port=8881
 ```
 
 spring.cloud.config.label 指明远程仓库的分支
+
 spring.cloud.config.profile
 
 dev开发环境配置文件
 test测试环境
 pro正式环境
-spring.cloud.config.uri=http://localhost:8888/ 指明配置服务中心的网址。
+
+spring.cloud.config.uri=http://localhost:8888/ 指明配置服务中心的网址
 
 程序的入口类，写一个API接口“／hi”，返回从配置中心读取的foo变量的值，代码如下：
 
