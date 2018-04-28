@@ -288,7 +288,7 @@ public class ConfigClientApplication {
 }
 ```
 
-打开网址访问：http://localhost:8881/hi，网页显示：
+打开浏览器访问：http://localhost:8881/hi，网页显示：
 
 ```
 foo version 3
