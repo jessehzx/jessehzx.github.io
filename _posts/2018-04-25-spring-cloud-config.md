@@ -248,7 +248,7 @@ http请求地址和资源文件映射如下:
 </project>
 ```
 
-其配置文件bootstrap.properties：
+其配置文件application.properties：
 
 ```
 spring.application.name=config-client
