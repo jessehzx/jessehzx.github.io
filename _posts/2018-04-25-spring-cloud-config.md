@@ -32,7 +32,10 @@ Spring Cloud Config可以完美的支持以上所有的需求。
 首先在github上创建了一个工程，我取名为SpringcloudConfig，在工程下面创建一个文件夹config用来存放配置文件，为了模拟生产环境，我们创建以下三个配置文件：conf_test.properties、conf_dev.properties、conf_pro.properties，里面文件内容分别对应jessehzx.habit=coding test、jessehzx.habit=coding dev、jessehzx.habit=coding pro，下面我们构建config server。
 
 ### 构建config server
-创建一个spring-boot项目，取名为config-server，其pom.xml:
+
+**1、新建工程，引入依赖**
+
+创建一个spring boot项目，取名为config-server，其pom.xml:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -100,6 +103,8 @@ Spring Cloud Config可以完美的支持以上所有的需求。
 
 ```
 
+**2、启动类**
+
 在程序的入口Application类加上@EnableConfigServer注解开启配置服务器的功能，代码如下：
 
 ```
@@ -119,6 +124,8 @@ public class ConfigServiceApplication {
 }
 
 ```
+
+**3、配置文件**
 
 需要在程序的配置文件application.properties文件配置以下：
 
@@ -143,6 +150,8 @@ spring.cloud.config.server.git.password=your password
 
 如果git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写，本例子是公开仓库，放心使用。
 
+**4、web测试**
+
 启动程序，使用Postman工具或浏览器访问：http://localhost:8888/conf/dev
 
 ![](https://ws2.sinaimg.cn/large/006tKfTcgy1fqtx0l97rwj315i0i0ju0.jpg)
@@ -165,9 +174,11 @@ http请求地址和资源文件映射如下:
 ```
 以config-dev.properties为例子，它的application是config，profile是dev。client会根据填写的参数来选择读取对应的配置。
 
+>**完整代码请点我查阅：[https://github.com/jessehzx/config-server](https://github.com/jessehzx/config-server)**
+
 ### 构建一个config client
 
-1、新建工程，添加依赖
+**1、新建工程，添加依赖**
 
 重新创建一个spring boot项目，取名为config-client，其pom.xml文件类似config-server项目，多加两个依赖，方便web测试，如下：
 
@@ -189,7 +200,7 @@ http请求地址和资源文件映射如下:
 </dependencies>
 ```
 
-2、配置文件
+**2、配置文件**
 
 需要配置两个配置文件，application.properties和bootstrap.properties。
 
@@ -216,6 +227,8 @@ server.port=8889
 
 > 注意：上面这些与spring-cloud相关的属性必须配置在bootstrap.properties中，config部分内容才能被正确加载。因为config的相关配置会先于application.properties，而bootstrap.properties的加载也是先于application.properties。
 
+**3、启动类**
+
 程序的入口类，写一个API接口"/get_habit"，返回从配置中心读取的变量jessehzx.habit的值，代码如下：
 
 ```
@@ -236,11 +249,15 @@ public class ConfigClientApplication {
 }
 ```
 
+**4、web测试**
+
 使用Postman工具或打开浏览器访问：http://localhost:8889/get_habit，网页显示：
 
 ![](https://ws2.sinaimg.cn/large/006tKfTcgy1fqtxf3y9thj30uc04ojrt.jpg)
 
 这就说明，config-client从config-server获取了jessehzx.habit的属性，而config-server是从git仓库读取的。
+
+**5、刷新**
 
 我们再这个基础上进行一些小实验：手动修改config-dev.properties中配置信息为：jessehzx.habit=coding dev update1提交到github，再次在浏览器访问http://localhost:8889/get_habit，返回：jessehzx.habit:coding dev update，说明获取的信息还是旧的，这是为什么呢？因为spring boot项目只有在启动的时候才会获取配置文件的值，修改github信息后，client端并没有再次去获取，所以导致这个问题。如何去解决这个问题呢？
 
@@ -269,4 +286,4 @@ public class ConfigClientApplication {
 我们在访问一次看看，就发现已经将github上更新后的配置内容获取到客户端了：
 ![](https://ws4.sinaimg.cn/large/006tKfTcgy1fqtxquomjdj30n204awev.jpg)
 
-本文源码下载：
+>**完整代码请点我查阅：[https://github.com/jessehzx/config-client](https://github.com/jessehzx/config-client)**
