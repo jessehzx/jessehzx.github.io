@@ -29,10 +29,10 @@ Spring的AOP(Aspect Oriented Programming)面向切面编程可以完美解决。
 ### AspectJ语法
 
 ```
-"execution(* cn.youyinian.controller.v1.*.*(..))"
+"execution(* top.jessehzx.controller.v1.*.*(..))"
 ```
 
-- 指定在执行 cn.youyinian.controller.v1 包中任意类的任意方法之前执行方法增强；
+- 指定在执行 top.jessehzx.controller.v1 包中任意类的任意方法之前执行方法增强；
 - 第一个星号表示返回值不限；
 - 第二个星号表示类名不限；
 - 第三个星号表示方法名不限；
@@ -45,7 +45,7 @@ Spring的AOP(Aspect Oriented Programming)面向切面编程可以完美解决。
 ```
 @Aspect
 public class LogAspect {
-  @Before("execution(* cn.youyinian.test.*.*(..))")
+  @Before("execution(* top.jessehzx.test.*.*(..))")
   publc void doBefore() {
     System.out.println("test before");
   }
@@ -59,7 +59,7 @@ public class LogAspect {
 ```
 @Aspect
 public class LogAspect {
-  @AfterReturning(returning="rvt", pointcut="execution(* cn.youyinian.test.*.*(..))")
+  @AfterReturning(returning="rvt", pointcut="execution(* top.jessehzx.test.*.*(..))")
   publc void doAfterReturning(Object rvt) {
     System.out.println("获取返回值：" + rvt);
   }
@@ -73,7 +73,7 @@ public class LogAspect {
 ```
 @Aspect
 public class LogAspect {
-  @After("execution(* cn.youyinian.test.*.*(..))")
+  @After("execution(* top.jessehzx.test.*.*(..))")
   publc void doAfter() {
     System.out.println("test after");
   }
@@ -87,7 +87,7 @@ public class LogAspect {
 ```
 @Aspect
 public class LogAspect {
-  @Around("execution(* cn.youyinian.test.*.*(..))")
+  @Around("execution(* top.jessehzx.test.*.*(..))")
   publc void doAround(ProceedingJoinPoint pjp) {
     System.out.println("around before");
     pjp.proceed();
@@ -103,7 +103,7 @@ ProceedingJoinPoint 参数是必须的，因为要使的目标方法要调用，
 ```
 @Aspect
 public class LogAspect {
-  @AfterThrowing(throwing="ex", pointcut="execution(* cn.youyinian.test.*.*(..))")
+  @AfterThrowing(throwing="ex", pointcut="execution(* top.jessehzx.test.*.*(..))")
   publc void doThrowing(Throwable ex) {
     System.out.println("目标方法抛出异常：" + ex);
   }
@@ -122,7 +122,7 @@ public class LogAspect {
 public class LogInterceptor {
 
   // 定义一个切入点
-  @Pointcut("execution(* cn.youyinian.handler.*(..))")
+  @Pointcut("execution(* top.jessehzx.handler.*(..))")
   private void log() {}
 
   // before增强
@@ -142,9 +142,9 @@ public class LogInterceptor {
 目标方法：
 
 ```
-package cn.youyinian.handler.topic;
+package top.jessehzx.handler.topic;
 
-import cn.youyinian.remote.TopicRemoteService;
+import top.jessehzx.remote.TopicRemoteService;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.JobHander;
@@ -183,7 +183,7 @@ public class TaskLockAspect {
 
   // 此处省略部分代码
 
-  @Pointcut("@annotation(cn.youyinian.annotation.LockMethod)")
+  @Pointcut("@annotation(top.jessehzx.annotation.LockMethod)")
   public void pointCut() {
   }
 
@@ -214,7 +214,7 @@ public class TaskLockAspect {
 目标方法：
 
 ```
-package cn.youyinian.controller.v1.remote;
+package top.jessehzx.controller.v1.remote;
 // 此处省略部分代码
 
 @RestController
