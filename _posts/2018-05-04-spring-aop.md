@@ -27,6 +27,7 @@ Spring的AOP(Aspect Oriented Programming)面向切面编程可以完美解决。
 - 切入点（Pointcut）：指我们要对哪些Joinpoint进行拦截的定义。
 
 ### AspectJ语法
+
 ```
 "execution(* cn.youyinian.controller.v1.*.*(..))"
 ```
