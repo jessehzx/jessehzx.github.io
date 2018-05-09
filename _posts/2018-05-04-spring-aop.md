@@ -23,7 +23,7 @@ Spring的AOP(Aspect Oriented Programming)面向切面编程可以完美解决。
 
 - 切面（Aspect）：是切入点和增强的结合；
 - 连接点（Joinpoint）：类里面可以被增强的方法，这些方法称为连接点；
-- 增强处理（Advice）：指拦截到Joinpoint之后所要做的事情就是增强。增强分为前置增强，后置增强，环绕增强，异常增强，最终增强(切面要完成的功能)；
+- 增强处理（Advice）：指拦截到Joinpoint之后所要做的事情就是增强。增强分为前置增强，后置增强，环绕增强，异常抛出增强，最终增强；
 - 切入点（Pointcut）：指我们要对哪些Joinpoint进行拦截的定义。
 
 ### AspectJ语法
@@ -96,7 +96,7 @@ public class LogAspect {
 }
 ```
 
-ProceedingJoinPoint 参数是必须的，因为要使的目标方法要调用，那么必须调用其方法proceed()。
+ProceedingJoinPoint 参数是必须的，因为要让目标方法调用，那么必须调用其方法proceed()。
 
 **AfterThrowing**
 
