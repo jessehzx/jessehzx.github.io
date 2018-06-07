@@ -34,9 +34,8 @@ java.io.NotSerializableException: xxx.xxx.Song
 
 ### 应用场景
 
-一、对象序列化可以实现分布式对象。主要应用例如：RMI要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象时一样。
-
-二、java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据。可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递。利用对象序列化可以进行对象的“深复制“，即复制对象本身及引用的对象本身。
+- 对象序列化可以实现分布式对象。主要应用例如：RMI要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象时一样。
+- java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据。可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递。利用对象序列化可以进行对象的“深复制“，即复制对象本身及引用的对象本身。
 
 ### 认识serialVersionUID
 
@@ -241,5 +240,5 @@ private static RuntimeSchema<Student> schema = RuntimeSchema.createFrom(Student.
 
 <p align="center">（全剧终）</p>
 
-<div align=center><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs2fjgw2icj30im0lk0um.jpg" width="300" height="348"/></div>
+<p align="center"><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs2fjgw2icj30im0lk0um.jpg" width="300" height="348"/></p>
 
