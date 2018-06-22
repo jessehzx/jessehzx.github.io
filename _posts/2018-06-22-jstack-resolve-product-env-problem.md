@@ -1,4 +1,17 @@
+---
+layout:     post
+title:      使用jstack排查线上故障：高CPU占用
+subtitle:   你公司的线上服务器CPU达到100%了么？
+date:       2018-06-22             
+author:     jessehzx                
+header-img: img/post-bg-os-metro.jpg
+catalog: 	  true
+tags:
+    - 线上故障
+        
+---
 
+> 版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！
 
 《深入理解Java虚拟机（第2版）》看到第4章 - 【虚拟机性能监控与故障处理工具】，该章节中罗列了各种JDK的命令行工具，其中jstack令我印象深刻。还记得是去年，我们遇到了线上虚拟机CPU占用过高，导致触发监控平台一直发短信告警的故障。当时就是利用了jstack命令帮助我们跟踪Java堆栈信息，从而排查出代码问题的。
 
