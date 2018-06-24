@@ -30,7 +30,7 @@ Java内存模型是描述Java程序中各变量（实例域、静态域和数组
 
 在Java虚拟机中，内存分为三个代：新生代（New）、老年代（Old）、永久代（Perm）。
 
-1. 新生代：新建的对象都存放这里
+1. 新生代：新建的对象都存放这里。
 
 2. 老年代：存放从新生代New中迁移过来的生命周期较久的对象。新生代New和老生代Old共同组成了堆内存。
 
@@ -38,13 +38,13 @@ Java内存模型是描述Java程序中各变量（实例域、静态域和数组
 
 ### 两种异常的原因
 
-- 如果出现java.lang.OutOfMemoryError: Java heap space异常，说明Java虚拟机的堆内存不够。原因有二：
+如果出现java.lang.OutOfMemoryError: Java heap space异常，说明Java虚拟机的堆内存不够。原因有二：
 
-一是Java虚拟机的堆内存设置不够，可以通过参数-Xms、-Xmx来调整。
+- Java虚拟机的堆内存设置不够，可以通过参数-Xms、-Xmx来调整。
 
-二是代码中创建了大量大对象，并且长时间不能被垃圾收集器收集（存在被引用）。
+- 代码中创建了大量大对象，并且长时间不能被垃圾收集器收集（存在被引用）。
 
-- 如果出现java.lang.OutOfMemoryError: PermGen space，说明是Java虚拟机对永久代Perm内存设置不够。
+如果出现java.lang.OutOfMemoryError: PermGen space，说明是Java虚拟机对永久代Perm内存设置不够。
 
 一般出现这种情况，都是程序启动需要加载大量的第三方jar包。例如：在一个Tomcat下部署了太多的应用。 
 
