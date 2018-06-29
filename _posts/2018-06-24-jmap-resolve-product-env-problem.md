@@ -106,7 +106,7 @@ jmap -histo:live 2809 | head -n 100
 
 2. jmap -histo:live [pid]，然后分析具体的对象数目和占用内存大小，从而定位代码。
 
-3. jmap -dump:live,format=b,file=xxx.xxx [pid]，然后利用MAT工具分析是否存在内存泄漏等等。
+3. jmap -dump:live,format=b,file=xxx.xxx [pid]，然后利用MAT工具分析是否存在内存泄漏。
 
 我希望每一个搞计算机的人在平时都多提升自己，不要觉得这个东西用不到就不去学，而是应该抱着这个知识点很重要，我要计划好时间去学的心态，才能走得长远。
 
