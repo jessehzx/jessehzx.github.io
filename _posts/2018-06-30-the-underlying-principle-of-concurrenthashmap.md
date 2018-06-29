@@ -19,7 +19,7 @@ HashMap 和 Hashtable 相信大家再熟悉不过了。其中 HashMap 是非线�
 
 多线程场景，在不考虑性能的情况下，要实现线程安全，我们的解决方案有 Hashtable 或者Collections.synchronizedMap (hashMap)，这两种方案基本上都是对整个 hash 表结构做锁定操作，在表锁定期间，别的线程都需要等待锁释放才能执行，效率极其低下。
 
-而在JDK5之后为了改进 Hashtable 的痛点，ConcurrentHashMap应运而生。
+而在JDK5之后为了改进 Hashtable 的痛点，Doug Lea给我们带来了并发安全的ConcurrentHashMap。
 
 ConcurrentHashMap 的实现是依赖于 Java 内存模型，所以我们在了解 ConcurrentHashMap 的前提是必须了解 Java 内存模型。可以参见之前的文章-- [JVM内存结构和Java内存模型](https://mp.weixin.qq.com/s?__biz=MzU5MDYxOTc2NQ==&mid=2247483673&idx=1&sn=cbe21ab043e16e079096534fab7de0a3&chksm=fe3a3403c94dbd1539cdaf79af39233dfb830419295512c8eaf6a3a683d133c72b03db2554cd#rd)，这里我假设读者已经对 Java 内存模型有所了解。
 
