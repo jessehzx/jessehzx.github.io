@@ -95,7 +95,7 @@ jmap -histo:live 2809 | head -n 100
 
 从上图可以看出，int数组、constMethodKlass、methodKlass、constantPoolKlass都占用了大量的内存。
 
-特别是占用了大量内存的int数组，务必要仔细检查相关代码，才能让内存高使用率降下来。
+特别是占用了大量内存的int数组，务必要仔细检查相关代码，才能让内存的高使用率给降下来。
 
  
 ### 总结 
