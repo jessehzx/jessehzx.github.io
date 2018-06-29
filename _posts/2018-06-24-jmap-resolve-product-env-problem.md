@@ -110,6 +110,6 @@ jmap -histo:live 2809 | head -n 100
 
 我希望每一个搞计算机的人在平时都多提升自己，不要觉得这个东西用不到就不去学，而是应该抱着这个知识点很重要，我要计划好时间去学的心态，才能走得长远。
 
-<p align="center">（EOF）</p>
+<p align="center">-----------------------------------  EOF  -----------------------------------</p>
 
 <p align="center"><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs2fjgw2icj30im0lk0um.jpg" width="300" height="348"/></p>
