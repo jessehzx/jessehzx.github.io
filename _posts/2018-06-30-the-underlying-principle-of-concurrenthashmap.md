@@ -21,7 +21,7 @@ HashMap 和 Hashtable 相信大家再熟悉不过了。其中 HashMap 是非线�
 
 而在JDK5之后为了改进 Hashtable 的痛点，Doug Lea给我们带来了并发安全的ConcurrentHashMap。
 
-ConcurrentHashMap 的实现是依赖于 Java 内存模型，所以我们在了解 ConcurrentHashMap 的前提是必须了解一些底层知识。可以参见之前的文章-- [JVM内存结构和Java内存模型](https://mp.weixin.qq.com/s?__biz=MzU5MDYxOTc2NQ==&mid=2247483673&idx=1&sn=cbe21ab043e16e079096534fab7de0a3&chksm=fe3a3403c94dbd1539cdaf79af39233dfb830419295512c8eaf6a3a683d133c72b03db2554cd#rd)，这里我假设大家对 Java 内存模型已经有所了解。
+ConcurrentHashMap 的实现是依赖于 Java 内存模型，所以我们在了解 ConcurrentHashMap 的前提是必须了解一些底层知识。可以参见之前的文章-- [JVM内存结构和Java内存模型](https://mp.weixin.qq.com/s?__biz=MzU5MDYxOTc2NQ==&mid=2247483673&idx=1&sn=cbe21ab043e16e079096534fab7de0a3&chksm=fe3a3403c94dbd1539cdaf79af39233dfb830419295512c8eaf6a3a683d133c72b03db2554cd#rd)，这里假设大家对 Java 内存模型已经有所了解。
 
 ### ConcurrentHashMap结构描述
 
