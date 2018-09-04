@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      简要分析JDK8下的ConcurrentHashMap实现原理
+title:      分析JDK8下的ConcurrentHashMap的实现原理
 subtitle:   ConcurrentHashMap，了解一下？
 date:       2018-06-24            
 author:     jessehzx                
