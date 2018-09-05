@@ -15,7 +15,7 @@ tags:
 
 ### 为什么会有ConcurrentHashMap
 
-HashMap 和 Hashtable 相信大家再熟悉不过了。其中 HashMap 是非线程安全的，当我们只有一个线程在使用 HashMap 的时候，自然不会有问题，但如果涉及到多个线程，并且有读有写的过程中，HashMap 就不能满足我们的需要了 (fail-fast)。
+HashMap 和 Hashtable 相信大家再熟悉不过了。其中 HashMap 是非线程安全的，当我们只有一个线程在使用 HashMap 的时候，自然不会有问题。但如果涉及到多个线程的读写过程，HashMap 就不能满足我们的需要了 (与引起fail-fast)。
 
 在多线程场景，不考虑性能的情况下，要实现线程安全，我们的解决方案有 Hashtable 或者Collections.synchronizedMap (hashMap)，这两种方案基本上都是对整个 hash 表结构做锁定操作，在表锁定期间，别的线程都需要等待锁释放才能执行，效率极其低下。
 
