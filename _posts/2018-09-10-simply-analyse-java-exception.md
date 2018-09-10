@@ -1,5 +1,6 @@
 ### 引子
 先一起来看看下面的代码：
+
 ```
 package com.jessehzx.Exception;
 /**
@@ -19,8 +20,10 @@ public class ExceptionTypeTest {
 ```
 
 问：上面的代码能编译通过吗？
+
 答：可以。ArithmeticException是RuntimeException异常，可以不进行捕获或抛出。
 如果改为IOException，如下：
+
 ```
 package com.jessehzx.Exception;
 import java.io.*;
@@ -41,37 +44,48 @@ public class ExceptionTypeTest {
 ```
 
 问：它还能编译通过吗？
+
 答：不能。IOException是直接继承自Exception的异常，它必须得到处理，要么捕获要么抛出。
 
 ### 受检异常和非受检异常
 上面两个例子中，ArithmeticException与IOException都是来自Exception体系，为什么一个不需要处理，一个需要处理呢？这就涉及到两个概念：受检异常和非受检异常。
 先来复习一下Java异常体系：
+
 ![Java异常体系](https://ws2.sinaimg.cn/large/006tNbRwgy1fv4hhrmr2sj30uw0cqdgt.jpg)
+
 - 非受检异常：RuntimeException及其子类。这类异常由程序员逻辑错误导致，应该人为承担责任。Java编译器不要求强制处理，即可以捕获或抛出，也可以不捕获或抛出。
 - 受检异常：非RuntimeException异常。这类异常是由于外部的一些偶然因素引起的。Java编译器要求强制处理，即必须得到捕获或抛出。
 
 两者的代表人物出场如下：
+
 - 非受检异常：RuntimeException,ArithmeticException,NullPointerException,ClassCastException,ArrayIndexsOutOfBoundsException
 - 受检异常：Exception,IOException,SQLException,FileNotFoundException
 
 ### 如何处理异常
 既然两者的概念清晰了，处理方式也随之昭然若揭。
-对受检异常：
+
+针对受检异常：
+
 - throws抛出。（这是低端做法）
 - try/catch捕获处理。（推荐之，高端做法）
-对非受检异常：
+
+针对非受检异常：
+
 - throws抛出。
 - try/catch捕获处理。
 - 不处理。（这一波可以，我才不管崩没崩，把锅背给上帝）
 
 ### 自定义异常
 以上是打基础的，下面来点高级玩法。
-应用场景：
+
 > 当需要一些跟特定业务相关的异常信息类时，我们可以在Java自身定义的异常之外，编写继承自Exception的受检异常类，也可以编写继承自RuntimeException或其子类的非受检异常类。
 
 一般情况下，异常类提供了默认构造器和一个带有String类型参数的构造器。我们的自定义异常，只需要实现这两个构造器就足够用了。因为最有价值的是我们定义的异常类型（即异常的名字），当异常发生时，我们只要看到了这个名字就知道发生了什么。所以除非有一些特殊操作，否则自定义异常只需简单实现构造器即可。
+
 示例：
+
 1、自定义业务异常类，继承自RuntimeException。
+
 ```
 package com.jessehzx.Exception;
 
@@ -103,12 +117,14 @@ public class BusinessException extends RuntimeException {
 }
 ```
 2、定义方法，声明throws这个自定义异常。要使用它，必须通知调用代码的类，做好准备接着这个异常。代码逻辑中异常发生的点，需要throw抛出。
+
 ```
     public void logicCode() throws BusinessException {
         throw new BusinessException("-1000", "业务出错");
     }
 ```
 3、测试自定义异常main方法
+
 ```
     public static void main(String[] args) {
         ExceptionTest et = new ExceptionTest();
@@ -121,6 +137,7 @@ public class BusinessException extends RuntimeException {
     }
 ```
 基本上，就差不多了。另外还有一个需要注意的点，就是：千万不要在finally再抛出一个非常规异常，因为它必定会执行，起到混淆视听的效果，切记。示例如下：
+
 ```
 package com.jessehzx.Exception;
 
@@ -149,6 +166,7 @@ public class ExceptionLoseTest {
 }
 ```
 执行结果如下：
+
 ```
 java.lang.NullPointerException
 	at com.jessehzx.Exception.ExceptionLoseTest.throwException(ExceptionLoseTest.java:14)
