@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      浅析Java异常
+subtitle:   受检异常？非受检异常？自定义异常？
+date:       2018-09-10            
+author:     jessehzx                
+header-img: img/post-bg-os-metro.jpg
+catalog: 	  true
+tags:
+    - Exception
+        
+---
+
+> 版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！
+
 ### 引子
 先一起来看看下面的代码：
 
@@ -73,10 +88,10 @@ public class ExceptionTypeTest {
 
 - throws抛出。
 - try/catch捕获处理。
-- 不处理。（这一波可以，我才不管崩没崩，把锅背给上帝）
+- 不处理。（这一波可以，我才不管程序崩没崩，把锅甩给上帝）
 
 ### 自定义异常
-以上是打基础的，下面来点高级玩法。
+以上是打基础，下面来玩点高级的。
 
 > 当需要一些跟特定业务相关的异常信息类时，我们可以在Java自身定义的异常之外，编写继承自Exception的受检异常类，也可以编写继承自RuntimeException或其子类的非受检异常类。
 
@@ -116,27 +131,27 @@ public class BusinessException extends RuntimeException {
     }
 }
 ```
-2、定义方法，声明throws这个自定义异常。要使用它，必须通知调用代码的类，做好准备接着这个异常。代码逻辑中异常发生的点，需要throw抛出。
+2、定义方法，声明throws这个自定义异常。要使用它，必须通知调用代码的类，做好抱接这个异常的心理准备。代码逻辑中异常发生的点，需要throw抛出。
 
 ```
-    public void logicCode() throws BusinessException {
-        throw new BusinessException("-1000", "业务出错");
-    }
+public void logicCode() throws BusinessException {
+    throw new BusinessException("-1000", "业务出错");
+}
 ```
 3、测试自定义异常main方法
 
 ```
-    public static void main(String[] args) {
-        ExceptionTest et = new ExceptionTest();
-        try {
-            et.logicCode();
-        } catch (BusinessException e) {
-            e.printStackTrace();
-            System.out.println("code=" + e.getCode() + "msg=" + e.getMsg());
-        }
+public static void main(String[] args) {
+    ExceptionTest et = new ExceptionTest();
+    try {
+        et.logicCode();
+    } catch (BusinessException e) {
+        e.printStackTrace();
+        System.out.println("code=" + e.getCode() + "msg=" + e.getMsg());
     }
+}
 ```
-基本上，就差不多了。另外还有一个需要注意的点，就是：千万不要在finally再抛出一个非常规异常，因为它必定会执行，起到混淆视听的效果，切记。示例如下：
+基本上，就差不多了。另外还有一个需要注意的点，就是：千万不要在finally再抛出一个非常规异常，因为它必定会执行，导致你try{}监测的代码块捕获的异常得不到处理，会起到混淆视听的效果，让你排查问题时摸不着头脑，请切记。示例如下：
 
 ```
 package com.jessehzx.Exception;
