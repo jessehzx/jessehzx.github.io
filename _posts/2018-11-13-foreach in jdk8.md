@@ -4,7 +4,7 @@ title:      别扯那些没用的系列之: forEach循环
 subtitle:   在你的项目中有多少是使用了这个特性？
 date:       2018-11-13           
 author:     jessehzx                
-header-img: img/post-bg-os-metro.jpg
+header-img: img/pexels-photo-427676.jpeg
 catalog: 	  true
 tags:
     - forEach
