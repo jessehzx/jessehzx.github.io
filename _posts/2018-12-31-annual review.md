@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      再见2018：我的个人总结
+subtitle:   年初定的flag，你都实现了？
+date:       2018-12-31            
+author:     jessehzx                
+header-img: img/pexels-photo-1654495.jpeg
+catalog: 	  true
+tags:
+    - review
+        
+---
+
+> 版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！
+
 
 2018年即将结束，今年你是否收获满满，年初定的flag都实现了么？此刻，我写下自己的一些感悟，以及做过的几件事情。
 
