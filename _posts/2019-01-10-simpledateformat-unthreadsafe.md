@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      一次 SimpleDateFormat 引发的惨案
+subtitle:   了解一下 SimpleDateFormat 的线程安全性及原因，并给出解决方案。
+date:       2019-01-11            
+author:     jessehzx                
+header-img: img/pexels-photo-1654495.jpeg
+catalog: 	  true
+tags:
+    - 线程安全
+        
+---
+
+> 版权声明：本文为 jessehzx 原创文章，支持转载，但必须在明确位置注明出处！！！
+
 
 #### 引子
 
@@ -337,3 +352,7 @@ public class DateUtil {
 2、多线程环境下，对每一个共享变量都要注意其线程安全性
 
 3、我们的类和方法在做设计的时候，要尽量设计成无状态的
+
+<div align=center>(完）
+
+<div align=center><img src="https://user-gold-cdn.xitu.io/2018/11/16/1671a288a68d53b7?w=440&h=453&f=jpeg&s=37712" width=30% height=30%/>
