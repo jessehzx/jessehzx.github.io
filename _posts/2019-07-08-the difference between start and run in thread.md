@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      [面试]Thread 中 start() 和 run() 的区别都不知道，还怎么混？
+title:      Thread 中 start() 和 run() 的区别都不知道，还怎么混？
 subtitle:   聊一聊 Java 线程中这两个方法不一样的点 ...
 date:       2019-07-08             
 author:     jessehzx                
