@@ -2,7 +2,7 @@
 layout:     post
 title:      接口挂死，你咋办？
 subtitle:   一次线上接口挂死的经历 ...
-date:       2018-01-14            
+date:       2019-01-14            
 author:     jessehzx                
 header-img: img/pexels-photo-1654495.jpeg
 catalog: 	  true
